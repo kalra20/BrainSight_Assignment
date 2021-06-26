@@ -28,10 +28,10 @@ def load_cats_vs_dogs(cats_vs_dogs_path=data_path,extend = 'train_nbfs.npz'):
 
 
 class CIFARUnet:
-    def __init__(self, train=True, filename = 'live',maxepochs = 250):
+    def __init__(self, train=True, filename = 'abcd.h5',maxepochs = 250):
         # self.alpha = alpha
         self.num_classes = 1
-        self.weight_decay= 1e-6
+        self.weight_decay= 1e-5
         self.weight_decay_fc= 5e-4
         self.weight_decay_rc= 5e-4
         # self.noise = noise_frac
@@ -249,74 +249,3 @@ class CIFARUnet:
         model.save_weights("checkpoints/{}".format(self.filename))
         return model
     
-    
-# model = CIFARUnet(True,'abcd',100)
-
-
-
-
-    # def build_model(self):
-    #     # Build the network of vgg for 10 classes with massive dropout and weight decay as described in the paper.
-    #     acti = 'relu'
-    #     # weight_decay = self.weight_decay
-    #     weight_decay = self.weight_decay
-    #     weight_decay_fc = self.weight_decay_fc
-    #     weight_decay_rc = self.weight_decay_rc
-    #     basic_dropout_rate = 0.3
-    #     n_classes = 1
-    #     # elif IMAGE_ORDERING == 'channels_last':
-    #     MERGE_AXIS = -1
-    #     IMAGE_ORDERING = 'channels_last'
-    #     img_input = Input(shape=(256,256,1))
-    #     conv1 = Conv2D(32, (3, 3), data_format=IMAGE_ORDERING,
-    #                activation='relu', padding='same')(img_input)
-    #     conv1 = BatchNormalization()(conv1)
-    #     conv1 = Dropout(0.2)(conv1)
-    #     conv1 = Conv2D(32, (3, 3), data_format=IMAGE_ORDERING,
-    #                   activation='relu', padding='same')(conv1)
-    #     conv1 = BatchNormalization()(conv1)
-    #     pool1 = MaxPooling2D((2, 2), data_format=IMAGE_ORDERING)(conv1)
-
-    #     conv2 = Conv2D(64, (3, 3), data_format=IMAGE_ORDERING,
-    #                   activation='relu', padding='same')(pool1)
-    #     conv2 = BatchNormalization()(conv2)
-    #     conv2 = Dropout(0.2)(conv2)
-    #     conv2 = Conv2D(64, (3, 3), data_format=IMAGE_ORDERING,
-    #                   activation='relu', padding='same')(conv2)
-    #     conv2 = BatchNormalization()(conv2)
-    #     pool2 = MaxPooling2D((2, 2), data_format=IMAGE_ORDERING)(conv2)
-
-    #     conv3 = Conv2D(128, (3, 3), data_format=IMAGE_ORDERING,
-    #                   activation='relu', padding='same')(pool2)
-    #     conv3 = BatchNormalization()(conv3)
-    #     conv3 = Dropout(0.2)(conv3)
-    #     conv3 = Conv2D(128, (3, 3), data_format=IMAGE_ORDERING,
-    #                   activation='relu', padding='same')(conv3)
-    #     conv3 = BatchNormalization()(conv3)
-
-    #     up1 = concatenate([UpSampling2D((2, 2), data_format=IMAGE_ORDERING)(
-    #         conv3), conv2], axis=MERGE_AXIS)
-    #     conv4 = Conv2D(64, (3, 3), data_format=IMAGE_ORDERING,
-    #                   activation='relu', padding='same')(up1)
-    #     conv4 = BatchNormalization()(conv4)
-    #     # conv4 = Dropout(0.2)(conv4)
-    #     conv4 = Dropout(0.2)(conv4)
-    #     conv4 = Conv2D(64, (3, 3), data_format=IMAGE_ORDERING,
-    #                   activation='relu', padding='same')(conv4)
-    #     conv4 = BatchNormalization()(conv4)
-    #     up2 = concatenate([UpSampling2D((2, 2), data_format=IMAGE_ORDERING)(
-    #         conv4), conv1], axis=MERGE_AXIS)
-    #     conv4 = BatchNormalization()(up2)
-    #     conv5 = Conv2D(32, (3, 3), data_format=IMAGE_ORDERING,
-    #                   activation='relu', padding='same')(up2)
-    #     conv5 = Dropout(0.2)(conv5)
-    #     conv5 = Conv2D(32, (3, 3), data_format=IMAGE_ORDERING,
-    #                   activation='relu', padding='same' , name="seg_feats")(conv5)
-
-    #     o = Conv2D(n_classes, (1, 1), data_format=IMAGE_ORDERING,
-    #               padding='same')(conv5)
-
-    #     # model = get_segmentation_model(img_input, o)
-    #     model = Model(inputs=[img_input], outputs=[o])
-    #     model.model_name = "unet_mini"
-    #     return model
