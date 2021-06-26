@@ -1,2 +1,2 @@
 from bsight_train import CIFARUnet
-model = CIFARUnet(True,'bc_sight.h5',3)
+model = CIFARUnet(True,'sight.h5',10)
