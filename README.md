@@ -5,7 +5,7 @@ Assignement 1:
     bsight_utils.py --- Contains files which are used for data formatting/data splitting/slice generation
     bsight_train.py --- Contains the code for unet used for training the model.
     inference_bsight.py --- Contains the inference code. 
-    logs.out --- Contains the training logs for NFBS dataset
+    slurm-421329.out --- Contains the training logs for NFBS dataset
     Results Folder --- Results from the inference model
       1. On a training sample (A2000)
       2. On a testing sample (sub-01)
