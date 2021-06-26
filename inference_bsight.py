@@ -119,27 +119,7 @@ class CIFARUnet:
 
         model = Model(input = img_input, output = conv10)
         return model
-    def normalize(self, X_train, X_test):
-        # this function normalize inputs for zero mean and unit variance
-        # it is used when training a model.
 
-        mean = np.mean(X_train, axis=(0, 1, 2, 3))
-        std = np.std(X_train, axis=(0, 1, 2, 3))
-        X_train = (X_train - mean) / (std + 1e-7)
-        X_test = (X_test - mean) / (std + 1e-7)
-        print('std,mean',std,mean)
-        return X_train, X_test
-
-    # def _load_data(self):
-    #     # self.train_generator = DatasetGenerator(trainset,self.batch_size)
-    #     # self.valid_generator = DatasetGenerator(testset,self.batch_size)
-    #     (x_train, y_train) = load_cats_vs_dogs(extend='train_nbfs.npz')
-    #     self.x_train = x_train.astype('float32')
-    #     self.y_train = y_train.astype('float32')
-    #     (x_test, y_test) = load_cats_vs_dogs(extend='test_nbfs.npz')
-    #     self.x_test = x_test.astype('float32')
-    #     self.y_test = y_test.astype('float32')
-    #     self.x_train, self.x_test = self.normalize(x_train, x_test)
 
 mod = CIFARUnet(train=False)
 model = mod.build_model()
@@ -174,12 +154,6 @@ for i,pred in enumerate(preds):
     plt.imsave('images/img_'+str(i)+'.jpg',img[:,:,0],cmap=cm.gray)
     plt.imsave('images_pred/img_'+str(i)+'.jpg',pred[:,:,0],cmap=cm.gray)
     # plt.imsave('images_mask/img_'+str(i)+'.jpg',img_m[:,:,0],cmap=cm.gray)
-# img = img[:,:,0].astype(np.uint8)
-# img = Image.fromarray(img)
-# img.save("img1.png")
-#Use the Datset Generator
-# model.evaluate
 
-#Provide input to the model and collect outputs
 
 
