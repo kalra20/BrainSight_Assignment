@@ -17,11 +17,11 @@ from keras.layers import Conv2D, MaxPooling2D, BatchNormalization, Concatenate, 
 from keras.layers import Dense, Dropout, Activation, Flatten, Input, UpSampling2D
 from keras.models import Model
 
-# from medpy.io import load
-### Commented
+# Read the data to create a dataset of 2D slices obtained from 3D nii images 
+### Commented since inference file uses classes from this model but was used earlier to create npz data files
 # data_path = 'NFBS_Dataset'
 # data_dirs = os.listdir(data_path)
-##########
+########## End Comment
 def collect_data(data_dirs):
 	data_list = []
 	for sub_dir in data_dirs:
@@ -37,7 +37,7 @@ def collect_data(data_dirs):
 
 
 
-#########Commented
+######## Commented since inference file uses classes from this model but was used earlier to create npz data files
 # data_list = collect_data(data_dirs)
 
 
@@ -58,14 +58,11 @@ def collect_data(data_dirs):
 # testset = [[xr,yr] for xr,yr in zip(x_test,y_test)]
 # print(trainset[0][1])
 
-############
+############ End Comment
 
-# from tensorflow.python.keras.utils import data_utils
-# keras = tf.compat.v1.keras
-# Sequence = keras.utils.Sequence
+
 from tensorflow.keras.utils import Sequence
-# from tensorflow.python.keras.utils import data_utils
-# class RandomFramesFromPathsToVideos(data_utils.Sequence):
+# Custom Dataset Loader for keras for creating 2D datasets
 class DatasetGenerator(Sequence):
 	def __init__(self, filenames, batch_size=64, crop_dim=[240,240], augment=False, seed=1):
 		img = np.array(nib.load(filenames[0][0]).dataobj) # Load the first image
@@ -222,7 +219,7 @@ class DatasetGenerator(Sequence):
 	def __getitem__(self, idx):
 	    return next(self.ds)
 
-
+# Used by Inference Code to generate 2D dataset for the 3D Image
 class SliceGenerator(Sequence):
 	def __init__(self, filenames, batch_size=64, crop_dim=[240,240], augment=False, seed=1):
 		
@@ -368,7 +365,7 @@ class SliceGenerator(Sequence):
 
 	def __getitem__(self, idx):
 	    return next(self.ds)
-##### Commented
+##### Commented since inference file uses classes from this model but was used earlier to create npz data files
 # train_generator = DatasetGenerator(trainset,64)
 # valid_generator = DatasetGenerator(testset,64)
 # print(len(train_generator))
@@ -389,3 +386,4 @@ class SliceGenerator(Sequence):
 # print('il',load_x.shape,load_y.shape)
 # np.savez_compressed(os.path.join(data_path, 'test.npz'),
 #                         x_train=load_x, y_train=load_y)
+##### End Comment
