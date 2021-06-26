@@ -7,7 +7,7 @@ Assignement 1:
     inference_bsight.py --- Contains the inference code. 
     slurm-421329.out --- Contains the training logs for NFBS dataset
     Results Folder --- Results from the inference model
-      1. On a training sample (A2000)
+      1. On a training sample (A00057786)
       2. On a testing sample (sub-01)
 
 
