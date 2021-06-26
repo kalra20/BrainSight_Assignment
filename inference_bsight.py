@@ -4,8 +4,9 @@ import numpy as np
 
 import os
 import nibabel as nib
-
-
+from PIL import Image
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 from keras.preprocessing.image import ImageDataGenerator
 from keras import backend as K
 from sklearn.model_selection import train_test_split
@@ -18,10 +19,10 @@ from keras.layers import Conv2D, MaxPooling2D, BatchNormalization, Concatenate, 
 from keras.layers import Dense, Dropout, Activation, Flatten, Input, UpSampling2D
 from keras.models import Model
 class CIFARUnet:
-    def __init__(self, train=True, filename = 'abcd',maxepochs = 250):
+    def __init__(self, train=True, filename = 'sight.h5',maxepochs = 250):
         # self.alpha = alpha
         self.num_classes = 2
-        self.weight_decay= 1e-4
+        self.weight_decay= 1e-5
         self.weight_decay_fc= 1e-7
         self.weight_decay_rc= 1e-7
         # self.noise = noise_frac
@@ -142,22 +143,40 @@ class CIFARUnet:
 
 mod = CIFARUnet(train=False)
 model = mod.build_model()
-#manage_the_input
-#feed the network
+
 #read the input
-data_path = 'T1Img/sub-01/T1w.nii.gz'
+# data_path_1 = 'A00057786/sub-A00057786_ses-NFB3_T1w.nii.gz'
+# data_path_1 = 'T1Img/sub-02/anat_img.nii.gz'
+# data_path_2 = 'A00057786/sub-A00057786_ses-NFB3_T1w_brainmask.nii.gz'
 # data_dirs = os.listdir(data_path)
-#get the output of the model for each slice
-# print(data_dirs)
-# filenames = 'A1...','A2....'
-# for file in data_path:
-#     print(file)
-x = SliceGenerator(data_path)
-# for i in range(x.shape[2]):
+data_path_1 = 'T1Img/sub-01/T1w.nii.gz'
 
-print(x[0].shape)
-preds = model.predict(x[0])
+#Prepare standardised data slices for testing
 
+x = SliceGenerator(data_path_1)
+# y = SliceGenerator(data_path_2)
+
+
+# print(x[0].shape)
+
+imgs = x[0]
+# imgs_mask = y[0]
+preds = model.predict(x[0]) # predict on slices
+# print(preds[0])
+# for each slice and it's prediction save the image
+for i,pred in enumerate(preds):
+    img = imgs[i]
+    pred[pred>0.5] = 1
+    pred[pred<0.5] = 0
+    # img_m = imgs_mask[i]
+# print(preds[0])
+# plt.plot(img)
+    plt.imsave('images/img_'+str(i)+'.jpg',img[:,:,0],cmap=cm.gray)
+    plt.imsave('images_pred/img_'+str(i)+'.jpg',pred[:,:,0],cmap=cm.gray)
+    # plt.imsave('images_mask/img_'+str(i)+'.jpg',img_m[:,:,0],cmap=cm.gray)
+# img = img[:,:,0].astype(np.uint8)
+# img = Image.fromarray(img)
+# img.save("img1.png")
 #Use the Datset Generator
 # model.evaluate
 
