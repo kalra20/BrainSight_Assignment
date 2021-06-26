@@ -8,5 +8,7 @@ logs.out --- Contains the training logs for NFBS dataset
 Results Folder --- Results from the inference model
   1. On a training sample (A2000)
   2. On a testing sample (sub-01)
+
+
 Assignment 2:
 Assignment_2.ipynb --- Code for assignment 2
