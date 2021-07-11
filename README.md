@@ -1,4 +1,4 @@
-# BrainSight_Assignment
+# Brain_Segmentation
 
 Assignement 1:
 
